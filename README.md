@@ -238,7 +238,7 @@ betegek?” kérdést. Az időbeli adatok lebonthatóak különböző jellemzők
 szerint, ami azt jelenti, hogy egyetlen görbe helyett többet kapunk – a
 lebontás alapján szolgáló változó minden lehetséges értékéhez egyet.
 (Például nemi lebontás választása esetén egyetlen görbe helyett két
-görbénk lesz, egy férfi és egy női). A térbeli adatok, tehát a térképes
+görbénk lesz, egy férfi és egy női.) A térbeli adatok, tehát a térképes
 ábrázolás esetén pedig szűkíthetünk, ami azt jelenti, hogy
 kiválaszthatunk egy vagy több változót, és azoknak megadhatunk egy
 értéket – ezt követően a térképen csak azok az eredmények fognak
