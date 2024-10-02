@@ -69,14 +69,15 @@ Nagyon általános szinten tekintve három lehetőség jöhet szóba:
   [HUNVASCDATA](https://hunvascdata.hu/)-projekt.
 - Végezetül a harmadik lehetőség a betegségregiszterek használata. A
   regiszter definíció szerint azt jelenti, hogy valamely megbetegedés
-  előfordulásáról a teljesség igényével készül gyűjtés. (Tipikusan
-  jogszabály írja el a kötelező jelentést az egészségügyi ellátóknak.)
-  Ez látszólag az ideális megoldás: teljeskörű, folyamatos, validálható
-  adatminőségű, részletgazdag klinikai adatokat is tartalmazhat,
-  egyetlen problémája van: az, hogy hatalmas az erőforrásigénye. Nem
-  csak „forintban” értve, hanem az adatszolgáltatói teherre nézve is,
-  hiszen ez azt is jelenti, hogy az észlelő orvosoknak minden beteg után
-  egy plusz jelentést is ki kell tölteniük, és feltölteni a regiszterbe.
+  előfordulásáról a teljesség igényével készül gyűjtés, klinikai
+  adatokkal együtt. (Tipikusan jogszabály írja el a kötelező jelentést
+  az egészségügyi ellátóknak.) Ez látszólag az ideális megoldás:
+  teljeskörű, folyamatos, validálható adatminőségű, részletgazdag
+  klinikai adatokat is tartalmazhat, egyetlen problémája van: az, hogy
+  hatalmas az erőforrásigénye. Nem csak „forintban” értve, hanem az
+  adatszolgáltatói teherre nézve is, hiszen ez azt is jelenti, hogy az
+  észlelő orvosoknak minden beteg után egy plusz jelentést is ki kell
+  tölteniük, és feltölteni a regiszterbe.
 
 A fentiekből is érzékelhető, hogy a regiszter használata, bár sok
 szempontból a legjobb lehetőség, jellemzően csak a népegészségügyileg
@@ -91,17 +92,19 @@ működik, végezve a teljeskörűség igényével az adatgyűjtést (és a
 gyűjtött adatok validációját is).
 
 Az adatok gyűjtése azonban csak a feladat egyik része: fel is kell
-azokat használni. Az NSZR esetében elmondható, hogy ezekből az adatokból
-számos tudományos publikáció készült az évek során, ami ezt a célt
-részben megvalósítja. Részben, de nem tökéletesen: az egyik probléma,
-hogy a tudományos publikációk mindig csak egy pillanatképet adnak, a
-tartalmuk nem frissül, a másik, hogy mindig csak egy adott témáról
-szólnak, amit ráadásul a kutatók határoztak meg, az olvasó nem tudja
-megváltoztatni. Szerencsére a mai informatikai lehetőségek mellett
-mindkét hiányosság pótolható: létrehozható egy olyan webes, interaktív
-felület, mely folyamatosan frissülő adatokat tartalmaz, és melyen az
-érdeklődő saját maga választhatja meg az elemzés tárgyát, beállításait.
-Fontos hangsúlyozni, hogy ez nem váltja ki a tudományos publikációkat,
+azokat használni. Az NSZR rendszeres jelentéseket készít az irányító
+egészségügyi hatóságoknak, valamint, ami a mi szempontukból még
+fontosabb, ezekből az adatokból számos tudományos publikáció is készült
+az évek során, ami ezt a hasznosítási célt részben megvalósítja.
+Részben, de nem tökéletesen: az egyik probléma, hogy a tudományos
+publikációk mindig csak egy pillanatképet adnak, a tartalmuk nem
+frissül, a másik, hogy mindig csak egy adott témáról szólnak, amit
+ráadásul a kutatók határoztak meg, az olvasó nem tudja megváltoztatni.
+Szerencsére a mai informatikai lehetőségek mellett mindkét hiányosság
+pótolható: létrehozható egy olyan webes, interaktív felület, mely
+folyamatosan frissülő adatokat tartalmaz, és melyen az érdeklődő saját
+maga választhatja meg az elemzés tárgyát, beállításait. Fontos
+hangsúlyozni, hogy ez nem váltja ki a tudományos publikációkat,
 ellenkezőleg, a két dolog szerepe egymást kiegészítő jellegű: a
 publikációk ugyanis a fenti nehézségeik mellett egyedi adatokon
 alapulnak, amik nyilvánosan nem közölhetőek, de finomabb elemzést
@@ -166,20 +169,20 @@ pillanatban négy különböző aspektusból vizsgálathatóak az NSZR adatai.
 - Az Előfordulás pont teszi vizsgálhatóvá a talán legalapvetőbb kérdést:
   hány megbetegedés történik? Ez a ,,kik betegek?’’ kérdéskör
   kiindulópontja. Kiválasztható, hogy az összes szívinfarktust
-  ábrázolja, az ST-elevációs infarktusokat (STEMI) vagy a
-  nem-ST-elevációs infarktusokat (NSTEMI). Az események abszolút száma
-  (esetszáma) ugyan érdekes adat, de nem összehasonlítható sem időben,
-  sem térben, hiszen eltér a különböző időpontok, illetve különböző
-  megyék lélekszáma. Éppen ezért fontos a következő mutató, a nyers
-  ráta, ami nem más, mint az esetszám osztva a megfelelő lélekszámmal.
-  Ez azonban még mindig nem tökéletes, hiszen elképzelhető, hogy
-  különböző időpontok, illetve különböző megyék között nem csak a
-  lakosok száma, de összetétele is eltér! Ha például az egyik megyében a
-  lakosok idősebbek, akkor egy ottani nagyobb nyers ráta nem feltétlenül
-  jelent rosszabb helyzetet, hiszen lehet, hogy csak az idősebb – és
-  emiatt nagyobb szívinfarktus-kockázatú – lakosok miatt van. Ez egy
-  példa arra az általános jelenségre, amit magyarban is gyakran használt
-  angol szóval
+  ábrázolja, az ST-elevációs infarktusokat (STEMI) vagy az
+  ST-elevációval nem járó infarktusokat (NSTEMI). Az események abszolút
+  száma (esetszáma) ugyan érdekes adat, de nem összehasonlítható sem
+  időben, sem térben, hiszen eltér a különböző időpontok, illetve
+  különböző megyék lélekszáma. Éppen ezért fontos a következő mutató, a
+  nyers ráta, ami nem más, mint az esetszám osztva a megfelelő
+  lélekszámmal. Ez azonban még mindig nem tökéletes, hiszen
+  elképzelhető, hogy különböző időpontok, illetve különböző megyék
+  között nem csak a lakosok száma, de összetétele is eltér! Ha például
+  az egyik megyében a lakosok idősebbek, akkor egy ottani nagyobb nyers
+  ráta nem feltétlenül jelent rosszabb helyzetet, hiszen lehet, hogy
+  csak az idősebb – és emiatt nagyobb szívinfarktus-kockázatú – lakosok
+  miatt van. Ez egy példa arra az általános jelenségre, amit magyarban
+  is gyakran használt angol szóval
   [confounding-nak](https://tamas-ferenci.github.io/FerenciTamas_AzOrvosiMegismeresModszertanaEsAzOrvosiKutatasokKritikusErtekelese/)
   szoktak nevezni. A standardizált ráta használata ezt szűri ki; fontos
   hangsúlyozni, hogy csak az életkor vonatkozásában. (Elvileg az is
@@ -258,12 +261,18 @@ adatkezelést a [data.table](https://rdatatable.gitlab.io/data.table/)
 csomag segíti.
 
 A transzparencia és a nyílt tudomány jegyében ennek teljes forráskódja
-elérhető a következő linken: app.R. Ennek tartalma kettős: egyrészt
-benne van magának a weboldalnak a forráskódja (ideértve a felületet, az
-eredmények előállítását és megjelenítését), másrészt benne van a
-háttérben lévő statisztikai számításoknak – különféle szűrések,
-lebontások, korrekciók – forráskódja is.
+elérhető a következő linken:
+[app.R](https://github.com/tamas-ferenci/NSZR-Lekerdezo/blob/main/app.R).
+Ennek tartalma kettős: egyrészt benne van magának a weboldalnak a
+forráskódja (ideértve a felületet, az eredmények előállítását és
+megjelenítését), másrészt benne van a háttérben lévő statisztikai
+számításoknak – különféle szűrések, lebontások, korrekciók – forráskódja
+is.
 
-A forráskód közzétételének a célja, hogy megkönnyítse, hogy az esetleg
+A forráskód közzétételének a célja, hogy megkönnyítse, hogy az esetleges
 hibái kiderüljenek, illetve elősegítse, hogy javítások,
 továbbfejlesztések születhessenek hozzá.
+
+------------------------------------------------------------------------
+
+Írta: Ferenci Tamás. E leírás utoljára frissítve: 2024. október 2.
