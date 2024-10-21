@@ -87,83 +87,22 @@ leirasurl <- paste0("https://github.com/tamas-ferenci/NSZR-Lekerdezo?tab=readme-
                     "a-nemzeti-sz%C3%ADvinfarktusregiszter-nszr-",
                     "interakt%C3%ADv-lek%C3%A9rdez%C5%91-fel%C3%BClete")
 
-filename <- "20240630020258_20231016_export.csv"
-
-datadate <- as.Date(substring(filename, 1, 8), format = "%Y%m%d")
-deathcutoffdate <- as.Date(strsplit(filename, "_")[[1]][2], format = "%Y%m%d")
-
-# RawData <- fread(filename, na.strings = "Nincs kitöltve")
-# RawData$V17 <- NULL
-# RawData <- RawData[!is.na(ELSO_KEZELES_FELVETEL_IDOPONT)]
-# RawData <- RawData[!is.na(SZULETESI_EV)]
-# RawData <- RawData[!is.na(NEM)]
-# RawData$HALAL_IDOPONT <- lubridate::force_tz(RawData$HALAL_IDOPONT, "Europe/Budapest")
-# RawData$HALAL_IDOPONT <- as.Date(RawData$HALAL_IDOPONT, tz = "Europe/Budapest")
-# names(RawData)[names(RawData) == "ELSO_KEZELES_FELVETEL_IDOPONT"] <- "DATEORIG"
-# RawData$DATEORIG <- lubridate::force_tz(RawData$DATEORIG, "Europe/Budapest")
-# RawData$DATE <- as.Date(RawData$DATEORIG, tz = "Europe/Budapest")
-# RawData <- RawData[DATE >= "2014-01-01"]
-# RawData$MORT30DAY <- ifelse(RawData$DATE > deathcutoffdate - 30, NA,
-#                             !is.na(RawData$HALAL_IDOPONT) &
-#                               RawData$HALAL_IDOPONT <= RawData$DATE + 30)
-# RawData$MORT1YEAR <- ifelse(RawData$DATE > deathcutoffdate - 365, NA,
-#                             !is.na(RawData$HALAL_IDOPONT) &
-#                               RawData$HALAL_IDOPONT <= RawData$DATE + 365)
-# # RawData$EVENT <- !is.na(RawData$HALAL_IDOPONT)
-# # RawData[is.na(HALAL_IDOPONT)]$HALAL_IDOPONT <- deathcutoffdate
-# # RawData$TIME <- as.numeric(difftime(
-# #   RawData$HALAL_IDOPONT, as.Date(RawData$DATE, tz = "Europe/Budapest"), units = "days"))
-# RawData$AGEcont <- as.numeric(difftime(
-#   RawData$DATE, as.Date(paste0(RawData$SZULETESI_EV, "-06-30")), units = "days"))/365.24
-# RawData$AGEcode <- cut(RawData$AGEcont, breaks = c(-Inf, seq(5, 90, 5), Inf), right = FALSE,
-#                        labels = c("Y_LT5", paste0("Y", seq(5, 85, 5), "-", seq(9, 89, 5)),
-#                                   "Y_GE90"))
-# RawData <- merge(RawData, AgeTable, by = "AGEcode")
-# RawData$AGEcode <- NULL
-# RawData[MEGYE == ""]$MEGYE <- NA
-# RawData <- merge(RawData, fread("MegyeKodok.csv"), by = "MEGYE", all.x = TRUE)
-# RawData$GEO <- NULL
-# RawData$YEAR <- as.Date(lubridate::floor_date(RawData$DATE, "year"), tz = "Europe/Budapest")
-# RawData$YEARMON <- as.Date(lubridate::floor_date(RawData$DATE, "month"), tz = "Europe/Budapest")
-# RawData$YEARFORMATTED <- format(RawData$DATE, "%Y")
-# RawData$YEARMONFORMATTED <- format(RawData$DATE, "%Y. %m.")
-# # for(v in c(NameTable[type %in%c("anamnestic", "comorb")]$variable, NameTable[type == "treatment"]$variable))
-# #   RawData[[v]] <- ifelse(is.na(RawData[[v]]), "Nem ismert",
-# #                          ifelse(RawData[[v]] == TRUE, "Igen", "Nem"))
-# for(v in c(NameTable[type %in%c("anamnestic", "comorb")]$variable, NameTable[type == "treatment"]$variable, NameTable[type == "survival"]$variable)) {
-#   RawData[[v]] <- ifelse(is.na(RawData[[v]]), NA,
-#                          ifelse(RawData[[v]] == TRUE, "Igen", "Nem"))
-# }
-# saveRDS(RawData, "RawData.rds")
-
 RawData <- readRDS("RawData.rds")
-
-# PopData <- data.table(eurostat::get_eurostat("demo_r_pjangrp3"))
-# PopData <- PopData[substring(geo, 1, 2) == "HU" & geo != "HUXXX" & nchar(geo) == 5]
-# PopData <- PopData[sex != "T"]
-# PopData <- PopData[age != "TOTAL" & age != "UNK" & age != "Y_GE85"]
-# PopData <- PopData[, .(NEM = ifelse(sex == "M", "Férfi", "Nő"), AGEcode = age, GEO = geo,
-#                        FREQ = "year", DATE = TIME_PERIOD, POP = values)]
-# PopData <- merge(PopData, AgeTable, by = "AGEcode")
-# PopData$AGEcode <- NULL
-# PopData <- merge(PopData, fread("MegyeKodok.csv"), by = "GEO")
-# PopData$GEO <- NULL
-# PopData <- rbind(PopData, PopData[DATE == as.Date("2023-01-01"),
-#                                   .(NEM, FREQ, DATE = as.Date("2024-01-01"),
-#                                     POP = round(POP / 9599744 * 9584627), AGE, MEGYE)])
-# # https://www.ksh.hu/stadat_files/nep/hu/nep0001.html
-# PopData <- rbind(
-#   PopData,
-#   PopData[, with(approx(as.numeric(DATE), POP, as.numeric(seq(min(DATE), max(DATE), "months"))),
-#                  list(DATE = as.Date(x), POP = round(y), FREQ = "month")),
-#           .(NEM, AGE, MEGYE)])
-# PopData[FREQ == "month", POP := POP/(365 + lubridate::leap_year(DATE))*lubridate::days_in_month(DATE)]
-# saveRDS(PopData, "PopData.rds")
+datadate <- RawData$datadate
+deathcutoffdate <- RawData$deathcutoffdate
+RawData <- RawData$RawData
 
 PopData <- readRDS("PopData.rds")
 
-StdPopData <- merge(fread("ESP2013.csv"), AgeTable,
-                    by = "AGEcode", sort = FALSE)[, .(AGE, STDPOP)]
+ESP2013 <- data.table(
+  AGEcode = c("Y_LT5", "Y5-9", "Y10-14", "Y15-19", "Y20-24", "Y25-29", "Y30-34", "Y35-39",
+              "Y40-44", "Y45-49", "Y50-54", "Y55-59", "Y60-64", "Y65-69", "Y70-74", "Y75-79",
+              "Y80-84", "Y85-89", "Y_GE90"),
+  STDPOP = c(5000L, 5500L, 5500L, 5500L, 6000L, 6000L, 6500L, 7000L, 7000L, 7000L, 7000L, 6500L,
+             6000L, 5500L, 5000L, 4000L, 2500L, 1500L, 1000L)
+)
+
+StdPopData <- merge(ESP2013, AgeTable, by = "AGEcode", sort = FALSE)[, .(AGE, STDPOP)]
 
 pickeropts <- shinyWidgets::pickerOptions(
   actionsBox = TRUE,
