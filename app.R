@@ -16,7 +16,7 @@ formatwci <- function(value, lci, uci, cond, uom, dig = 1) {
   paste0(roundwzero(value, dig), uom,
          if(cond) paste0(" (95% CI: ", roundwzero(lci, dig), uom,
                          " - ", roundwzero(uci, dig), uom, ")") else "")
-} 
+}
 
 hcoptslang <- getOption("highcharter.lang")
 hcoptslang$contextButtonTitle <- "Helyi menü"
@@ -82,6 +82,10 @@ NameTable <- data.table(
            "survival", "header", "header", "header", "header", "header",
            "header", "header")
 )
+
+leirasurl <- paste0("https://github.com/tamas-ferenci/NSZR-Lekerdezo?tab=readme-ov-file#",
+                    "a-nemzeti-sz%C3%ADvinfarktusregiszter-nszr-",
+                    "interakt%C3%ADv-lek%C3%A9rdez%C5%91-fel%C3%BClete")
 
 filename <- "20240630020258_20231016_export.csv"
 
@@ -309,7 +313,7 @@ ui <- navbarPage(
   title = "Nemzeti Szívinfarktus Regiszter",
   header = list(
     p("A program használatát részletesen bemutató súgó, valamint a technikai részletek",
-      a("itt", href = "https://nszr.gokvi.hu", target = "_blank" ), "olvashatóak el.")
+      a("itt", href = leirasurl, target = "_blank" ), "olvashatóak el.")
   ),
   
   footer = list(
@@ -430,8 +434,7 @@ server <- function(input, output) {
       p(paste0("Az adatok értelmezése, valamint a különféle összehasonlítások esetén ",
                "érdemes bármilyen következtetés ",
                "levonása előtt tanulmányozni az oldalhoz kapcsolódó "),
-        a(href = "https://nszr.gokvi.hu",
-          target = "_blank", "leírást", .noWS = "outside"),
+        a(href = leirasurl, target = "_blank", "leírást", .noWS = "outside"),
         ", mely igyekszik közérthetően összefoglalni a legfontosabb szempontokat. ",
         "Ezen kívül a weboldal maga is biztosít magyarázatot minden elemzési vetülethez; ",
         "ezen szempontok ismerete fontos a helyes következtetések levonásához."),
@@ -540,7 +543,7 @@ server <- function(input, output) {
         
         # if(stratvar0 == "MEGYE")
         #   temp <- merge(CJ(MEGYE = unique(RawData$MEGYE)), temp, by = "MEGYE", all.x = TRUE)
-
+        
         temp <- merge(temp, PopData[FREQ == freq,
                                     .(POP = sum(POP)), c(union(stratvar, c("DATE", "AGE")))],
                       by = c(union(stratvar, c("DATE", "AGE"))))
@@ -581,7 +584,7 @@ server <- function(input, output) {
                                            uom, if(metric == "absolute") 0 else 1))
     
     list(data = dat,
-         timeTitle = paste0("<b>", timeTitletext, "</b>",
+         timeTitle = paste0("<b>", timeTitletext,
                             switch(metric,
                                    "absolute" = " (esetszám)",
                                    "cruderate" = " (nyers ráta)",
@@ -589,10 +592,10 @@ server <- function(input, output) {
                                    "crude" = " (nyers arány)",
                                    "agesexadj" = " (életkorra és nemre korrigált arány)",
                                    "agesexcomorbadj" = " (életkorra, nemre és társbetegségekre korrigált arány)"),
+                            "</b>",
                             if(length(primary) == 1 && strat != "None")
                               paste0("<br>", NameTable[variable == primary]$name) else ""),
          spaceTitle = paste0("<b>", NameTable[variable %in% primary]$name, " ", spaceTitletext,
-                             "</b>",
                              switch(metric,
                                     "absolute" = " (esetszám)",
                                     "cruderate" = " (nyers ráta)",
@@ -600,9 +603,10 @@ server <- function(input, output) {
                                     "crude" = " (nyers arány)",
                                     "agesexadj" = " (életkorra és nemre korrigált arány)",
                                     "agesexcomorbadj" = " (életkorra, nemre és társbetegségekre korrigált arány)"),
-                             ", ", if(!is.null(yearSel)) {
+                             ", ",
+                             if(!is.null(yearSel)) {
                                if(yearSel[1] == yearSel[2]) yearSel[1] else paste0(yearSel, collapse = " - ")
-                             } , "<br>",
+                             } , "</b><br>",
                              if(!is.null(sexSel)) paste0("Nem: ", sexSel),
                              if(!is.null(ageSel)) paste0(" Életkor: ", ageSel),
                              if(!is.null(dgSel)) paste0(" Diagnózis: ", dgSel),
@@ -742,10 +746,10 @@ server <- function(input, output) {
       hc_exporting(enabled = TRUE, chartOptions = list(legend = TRUE),
                    sourceWidth = 1600/2, sourceHeight = 900/2,
                    pdfFont = list(
-                     normal = 'https://www.highcharts.com/samples/data/fonts/NotoSans-Regular.ttf',
-                     bold = 'https://www.highcharts.com/samples/data/fonts/NotoSans-Bold.ttf',
-                     bolditalic = 'https://www.highcharts.com/samples/data/fonts/NotoSans-BoldItalic.ttf',
-                     italic = 'https://www.highcharts.com/samples/data/fonts/NotoSans-Italic.ttf'
+                     normal = "https://nszr.gokvi.hu/_upload/fonts/NotoSans-Regular.ttf",
+                     bold = "https://nszr.gokvi.hu/_upload/fonts/NotoSans-Bold.ttf",
+                     bolditalic = "https://nszr.gokvi.hu/_upload/fonts/NotoSans-BoldItalic.ttf",
+                     italic = "https://nszr.gokvi.hu/_upload/fonts/NotoSans-Italic.ttf"
                    ),
                    buttons = list(contextButton = list(menuItems = list(
                      "viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG",
